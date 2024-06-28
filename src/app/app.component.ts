@@ -11,17 +11,68 @@ export class AppComponent {
 
   data: any[] = [];
 
-  // How to create an Observable
-  myObservable = new Observable((observer) => {
-    setTimeout(() => {observer.next(1)}, 1000);
-    setTimeout(() => {observer.next(2)}, 2000);
-    setTimeout(() => {observer.next(3)}, 3000);
-    // setTimeout(() => {observer.error(new Error('Something went wrong. Try some other time'))}, 4000);
-    setTimeout(() => {observer.next(4)}, 5000);
-    setTimeout(() => {observer.complete()}, 6000);
-  });
+  // How to Create an Observable
+  // next, complete, error
+  myObservable = new Observable((array) => {
+   setTimeout(() => {array.next(1)}, 1000);
+   setTimeout(() => {array.next(2)}, 2000);
+   setTimeout(() => {array.error()}, 3000);
+   setTimeout(() => {array.next(4)}, 4000);
+   setTimeout(() => {array.next(5)}, 5000);
+  })
+
 
   GetAsyncData(){
+
+    //Observer
+  //   this.myObservable.subscribe((arr) => {
+  //     this.data.push(arr);
+  //   }
+  // )
+
+  this.myObservable.subscribe({
+        next: (val: any) => {
+          this.data.push(val);
+        },
+        error: () => {
+          alert('Error seen');
+        },
+        complete: () => {
+          alert('Data fetching completed');
+          }
+      })
+      }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // How to create an Observable
+  // myObservable = new Observable((observer) => {
+  //   observer.next('Hello from Observable!');
+  //   observer.next('Good morning');
+  //   observer.next('Good afternoon');
+  //   observer.next('Good evening');
+  // }); 
+
+  // GetAsyncData(){
 
     // Observer
     // next, error, complete
@@ -37,16 +88,16 @@ export class AppComponent {
   //   }
   // );
 
-  this.myObservable.subscribe({
-    next: (val: any) => {
-      this.data.push(val);
-    },
-    error: (err) => {
-      alert(err.message);
-    },
-    complete: () => {
-      alert('Data fetching completed');
-      }
-  })
-  }
-}
+//   this.myObservable.subscribe({
+//     next: (val: any) => {
+//       this.data.push(val);
+//     },
+//     error: (err) => {
+//       alert(err.message);
+//     },
+//     complete: () => {
+//       alert('Data fetching completed');
+//       }
+//   })
+//   }
+// }
